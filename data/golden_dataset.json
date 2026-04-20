@@ -1,0 +1,182 @@
+[
+  {
+    "id": "bug_001",
+    "owner": "member1",
+    "title": "API returns 500 instead of 404 on unknown route",
+    "description": "Hitting GET /api/unknown returns a 500 with stack trace in the body. Should return a clean 404 with JSON error envelope.",
+    "tags": ["api"],
+    "expected_severity": "P1",
+    "expected_assignee_expertise": ["api"]
+  },
+  {
+    "id": "bug_002",
+    "owner": "member1",
+    "title": "Settings dropdown overlaps profile menu in dark mode",
+    "description": "On the account page, opening the settings dropdown causes it to overlap the profile menu when dark mode is active. Light mode renders correctly.",
+    "tags": ["ui"],
+    "expected_severity": "P2",
+    "expected_assignee_expertise": ["ui"]
+  },
+  {
+    "id": "bug_003",
+    "owner": "member1",
+    "title": "Please add CSV export to the orders page",
+    "description": "It would be great if the orders page had an Export to CSV button next to the filter bar. Right now we copy rows by hand into a spreadsheet.",
+    "tags": ["ui"],
+    "expected_severity": null,
+    "expected_assignee_expertise": []
+  },
+  {
+    "id": "bug_004",
+    "owner": "member1",
+    "title": "All checkout attempts fail with 'card declined' even on valid cards",
+    "description": "Since this morning every checkout returns 'card declined' from the gateway. Test cards from the gateway sandbox also fail. Revenue is currently zero.",
+    "tags": ["payment", "api"],
+    "expected_severity": "P0",
+    "expected_assignee_expertise": ["payment"]
+  },
+  {
+    "id": "bug_005",
+    "owner": "member1",
+    "title": "Tooltip on the help icon has a typo ('recieve' -> 'receive')",
+    "description": "The tooltip on the (?) icon in the billing section says 'recieve invoices'. Should be 'receive'. Cosmetic only.",
+    "tags": ["ui"],
+    "expected_severity": "P3",
+    "expected_assignee_expertise": ["ui"]
+  },
+  {
+    "id": "bug_006",
+    "owner": "member2",
+    "title": "Webhook signature verification accepts forged payloads",
+    "description": "verify_webhook returns True for payloads signed with an empty secret. An attacker can submit fake refund webhooks and trigger refunds without auth.",
+    "tags": ["payment", "security"],
+    "expected_severity": "P0",
+    "expected_assignee_expertise": ["payment", "security"]
+  },
+  {
+    "id": "bug_007",
+    "owner": "member2",
+    "title": "Password reset emails sometimes never arrive",
+    "description": "About 1 in 10 password reset requests never deliver an email. Users are blocked from logging in until a support agent issues a manual reset.",
+    "tags": ["auth"],
+    "expected_severity": "P1",
+    "expected_assignee_expertise": ["auth"]
+  },
+  {
+    "id": "bug_008",
+    "owner": "member2",
+    "title": "Pull-to-refresh gesture stutters on Android 14 devices",
+    "description": "On Pixel 8 / Android 14 the pull-to-refresh animation drops frames and the spinner judders. Functionality still works.",
+    "tags": ["mobile", "ui"],
+    "expected_severity": "P2",
+    "expected_assignee_expertise": ["mobile", "ui"]
+  },
+  {
+    "id": "bug_009",
+    "owner": "member2",
+    "title": "Empty-state illustration is misaligned by 2px on large screens",
+    "description": "On 1440p+ displays the illustration on the empty inbox screen sits 2 pixels too far left. Hard to notice unless overlaid with the design comp.",
+    "tags": ["ui"],
+    "expected_severity": "P3",
+    "expected_assignee_expertise": ["ui"]
+  },
+  {
+    "id": "bug_010",
+    "owner": "member2",
+    "title": "Search endpoint p95 latency jumped from 200ms to 1800ms",
+    "description": "Since the index rebuild last night, /api/search p95 has climbed to ~1.8s. Users are complaining the search 'feels broken'. CPU on search nodes is steady.",
+    "tags": ["performance", "api"],
+    "expected_severity": "P1",
+    "expected_assignee_expertise": ["performance"]
+  },
+  {
+    "id": "bug_011",
+    "owner": "member3",
+    "title": "Login page crashes on mobile Safari iOS 17",
+    "description": "Tapping the Login button on Safari iOS 17 immediately crashes the tab. The login flow works on Chrome iOS and on desktop Safari.",
+    "tags": ["auth", "mobile"],
+    "expected_severity": "P0",
+    "expected_assignee_expertise": ["auth"]
+  },
+  {
+    "id": "bug_012",
+    "owner": "member3",
+    "title": "query() leaks connections back to the pool when execute raises",
+    "description": "If conn.execute raises inside query(), the connection is still pushed back into the pool via the finally block, but it stays marked closed. Pool fills with dead connections.",
+    "tags": ["database"],
+    "expected_severity": "P1",
+    "expected_assignee_expertise": ["database"]
+  },
+  {
+    "id": "bug_013",
+    "owner": "member3",
+    "title": "reset_password does not invalidate active sessions on other devices",
+    "description": "After calling reset_password, sessions issued before the reset remain valid on other devices. Expected: all live tokens for that user are revoked.",
+    "tags": ["auth", "security"],
+    "expected_severity": "P2",
+    "expected_assignee_expertise": ["auth", "security"]
+  },
+  {
+    "id": "bug_014",
+    "owner": "member3",
+    "title": "begin_transaction context manager swallows rollback errors silently",
+    "description": "When rollback itself raises, the original exception is masked and the transaction state is left as in_transaction=True. Subsequent queries on the connection misbehave.",
+    "tags": ["database"],
+    "expected_severity": "P2",
+    "expected_assignee_expertise": ["database"]
+  },
+  {
+    "id": "bug_015",
+    "owner": "member3",
+    "title": "validate_session never expires tokens issued more than 8 hours ago",
+    "description": "validate_session uses a stale comparison and returns True for tokens past their SESSION_TTL window. Logged-in users effectively have an infinite session.",
+    "tags": ["auth", "security"],
+    "expected_severity": "P1",
+    "expected_assignee_expertise": ["auth", "security"]
+  },
+  {
+    "id": "bug_016",
+    "owner": "member4",
+    "title": "Refund endpoint chargeable without authentication",
+    "description": "POST /api/refund processes refunds without checking auth_middleware. Anyone with a transaction id can issue refunds. Actively being abused.",
+    "tags": ["payment", "security", "api"],
+    "expected_severity": "P0",
+    "expected_assignee_expertise": ["payment", "security"]
+  },
+  {
+    "id": "bug_017",
+    "owner": "member4",
+    "title": "Mobile app cold start takes 12+ seconds on mid-range Android devices",
+    "description": "Cold start time on Samsung A-series and similar mid-range Android devices is 12-15 seconds. Users churn on first launch. Newer flagship devices are unaffected.",
+    "tags": ["mobile", "performance"],
+    "expected_severity": "P1",
+    "expected_assignee_expertise": ["mobile", "performance"]
+  },
+  {
+    "id": "bug_018",
+    "owner": "member4",
+    "title": "Reports page query takes 30s+ for accounts with >10k orders",
+    "description": "The reports dashboard issues a single unindexed query that scans the orders table. For large accounts it times out. Smaller accounts are fine.",
+    "tags": ["database", "performance"],
+    "expected_severity": "P2",
+    "expected_assignee_expertise": ["database", "performance"]
+  },
+  {
+    "id": "bug_019",
+    "owner": "member4",
+    "title": "API rate limiter can be bypassed by varying the X-Forwarded-For header",
+    "description": "The rate limiter keys on X-Forwarded-For without validating the upstream proxy. Sending random IPs in that header bypasses the per-IP cap.",
+    "tags": ["api", "security"],
+    "expected_severity": "P2",
+    "expected_assignee_expertise": ["api", "security"]
+  },
+  {
+    "id": "bug_020",
+    "owner": "member4",
+    "title": "Splash screen logo is blurry on iPad Pro 11\" portrait",
+    "description": "On iPad Pro 11-inch in portrait orientation the splash logo appears blurry. Other orientations and devices render it crisply.",
+    "tags": ["mobile", "ui"],
+    "expected_severity": "P3",
+    "expected_assignee_expertise": ["mobile", "ui"]
+  }
+]

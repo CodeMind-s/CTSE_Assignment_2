@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Ada Fernando",
+    "expertise": ["auth", "security", "api"],
+    "current_workload": 3,
+    "timezone": "Asia/Colombo",
+    "in_business_hours": true
+  },
+  {
+    "name": "Ben Silva",
+    "expertise": ["payment", "database", "api"],
+    "current_workload": 5,
+    "timezone": "Asia/Colombo",
+    "in_business_hours": true
+  },
+  {
+    "name": "Chandi Perera",
+    "expertise": ["ui", "mobile"],
+    "current_workload": 2,
+    "timezone": "Asia/Colombo",
+    "in_business_hours": true
+  },
+  {
+    "name": "Dilshan Rajapaksa",
+    "expertise": ["performance", "database"],
+    "current_workload": 7,
+    "timezone": "America/New_York",
+    "in_business_hours": false
+  },
+  {
+    "name": "Erandi Wijesinghe",
+    "expertise": ["security", "auth", "api"],
+    "current_workload": 4,
+    "timezone": "Europe/London",
+    "in_business_hours": false
+  },
+  {
+    "name": "Farhan Ismail",
+    "expertise": ["ui", "performance", "mobile"],
+    "current_workload": 1,
+    "timezone": "Asia/Colombo",
+    "in_business_hours": true
+  }
+]
