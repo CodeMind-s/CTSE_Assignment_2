@@ -7,6 +7,7 @@ Usage:
 import argparse
 import os
 import sys
+import time
 
 from dotenv import load_dotenv
 
@@ -58,7 +59,23 @@ def main() -> None:
         sys.exit(2)
 
     app = build_graph()
-    final = app.invoke(_initial_state(args.bug, args.issue, args.repo))
+
+    print("Running triage...", flush=True)
+    t0 = time.time()
+    t_last = t0
+    final: dict = {}
+    for mode, chunk in app.stream(
+        _initial_state(args.bug, args.issue, args.repo),
+        stream_mode=["updates", "values"],
+    ):
+        if mode == "updates":
+            now = time.time()
+            for node_name in chunk.keys():
+                print(f"  [OK] {node_name:12s} ({now - t_last:5.1f}s)", flush=True)
+            t_last = now
+        elif mode == "values":
+            final = chunk
+    print(f"Total:    {time.time() - t0:.1f}s", flush=True)
 
     run_id = new_run_id()
     log_path = persist_run(run_id, final.get("logs", []))
