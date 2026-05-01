@@ -133,9 +133,11 @@ class TestCoordinatorJudged:
             answer=f"title={update['title']!r}, is_valid_bug={update['is_valid_bug']}, "
                    f"tags={update['tags']}",
             rubric=("The input describes a production payment outage. "
-                    "A correct triage result must flag is_valid_bug=true and "
-                    "produce a concise, on-topic title. Tags should include payment "
-                    "or api. Score 4+ if those hold, 5 if the title is sharp."),
+                    "Apply this rule strictly: if is_valid_bug=true AND tags "
+                    "contain 'payment' or 'api', the score is AT LEAST 4. "
+                    "Award 5 only if the title is also sharp and specific. "
+                    "Title quality alone NEVER drops the score below 4 when "
+                    "those two conditions hold. Off-topic or empty titles can."),
         )
         assert verdict["score"] >= 4, f"judge rejected: {verdict['reasoning']}"
 

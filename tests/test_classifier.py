@@ -132,12 +132,23 @@ class TestClassifierJudged:
         update = classifier.run(state)
         assert update["severity"] == "P0", "clear production outage must be P0"
         verdict = judge(
-            question=state["description"],
-            answer=f"severity={update['severity']}, "
-                   f"evidence={update['severity_evidence']}",
-            rubric=("A production-wide payment outage is a textbook P0. "
-                    "Score 5 if severity is P0 and evidence is on-topic, "
-                    "1 if severity is anything else."),
+            question=(
+                "An SRE classified a bug. Verify the classification matches "
+                "the expected label."
+            ),
+            answer=(
+                f"Classified severity label: {update['severity']}\n"
+                f"Expected severity label: P0\n"
+                f"Evidence cited: {update['severity_evidence']}"
+            ),
+            rubric=(
+                "This is a string-matching check, not a severity-reasoning task. "
+                "Do NOT decide what severity the bug should have. "
+                "Only compare the two labels in the answer.\n"
+                "Score 5 if 'Classified severity label' equals 'Expected severity label' "
+                "(both must read P0).\n"
+                "Score 1 if they differ."
+            ),
         )
         assert verdict["score"] >= 4, f"judge rejected: {verdict['reasoning']}"
 
